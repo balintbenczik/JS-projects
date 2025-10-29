@@ -1,8 +1,10 @@
+
+        //Declare new variables by Id
         const form = document.getElementById('todo-form');
         const input = document.getElementById('todo-input');
         const list = document.getElementById('todo-list');
 
-        // betöltés localStorage-ból
+        // Loaing from localStorage
         let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
         function render() {
@@ -12,7 +14,7 @@
                 li.textContent = todo.text;
                 if (todo.done) li.classList.add('done');
 
-                // Kész gomb
+                // Finish button
                 const doneBtn = document.createElement('button');
                 doneBtn.textContent = '✓';
                 doneBtn.onclick = () => {
@@ -20,7 +22,7 @@
                     saveAndRender();
                 };
 
-                // Törlés gomb
+                // Delete button
                 const delBtn = document.createElement('button');
                 delBtn.textContent = 'X';
                 delBtn.onclick = () => {
@@ -45,5 +47,6 @@
             input.value = '';
             saveAndRender();
         });
+
 
         render();
