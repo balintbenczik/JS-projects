@@ -39,6 +39,8 @@
   const temperatureElement = document.querySelector("#temperature");
   const descriptionElement = document.querySelector("#description");
 
+  // Make a click event for search button and async function
+
   searchButton.addEventListener("click", async () => {
     const location = locationInput.value.trim();
     if (!location) {
@@ -94,7 +96,7 @@
       const description = weatherDescriptions[weathercode] || "Unknown weather";
 
       // Show results on the screen
-      
+
       locationElement.textContent = `${name}, ${country}`;
       temperatureElement.textContent = `${Math.round(temperature)} °C`;
       descriptionElement.textContent = description;
