@@ -30,6 +30,9 @@
       </div>
     </div>
    <script>
+
+    // Declare everything we need from document
+
   const locationInput = document.querySelector("#locationInput");
   const searchButton = document.querySelector("#searchButton");
   const locationElement = document.querySelector("#location");
@@ -50,7 +53,9 @@
     descriptionElement.textContent = "";
 
     try {
-      // 1️⃣ Város keresése Open-Meteo geocoding API-val
+
+      // Search for cities with Geocoding API
+
       const geoRes = await fetch(
         `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1`
       );
@@ -63,7 +68,7 @@
 
       const { latitude, longitude, name, country } = geoData.results[0];
 
-      // 2️⃣ Időjárás lekérdezése Open-Meteo API-ból
+      // Ask for weather with Open Meteo API
       const weatherRes = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=auto`
       );
@@ -71,7 +76,8 @@
 
       const { temperature, weathercode, windspeed } = weatherData.current_weather;
 
-      // 3️⃣ Weather code -> leírás (egyszerű táblázat)
+      // Weather codes
+
       const weatherDescriptions = {
         0: "Clear sky ☀️",
         1: "Mainly clear 🌤️",
@@ -87,7 +93,8 @@
 
       const description = weatherDescriptions[weathercode] || "Unknown weather";
 
-      // 4️⃣ Adatok megjelenítése
+      // Show results on the screen
+      
       locationElement.textContent = `${name}, ${country}`;
       temperatureElement.textContent = `${Math.round(temperature)} °C`;
       descriptionElement.textContent = description;
