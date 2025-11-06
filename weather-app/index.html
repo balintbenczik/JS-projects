@@ -29,22 +29,74 @@
         <p id="description"></p>
       </div>
     </div>
-    <script>
-      const apiKey = "";
-      const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
+   <script>
+  const locationInput = document.querySelector("#locationInput");
+  const searchButton = document.querySelector("#searchButton");
+  const locationElement = document.querySelector("#location");
+  const temperatureElement = document.querySelector("#temperature");
+  const descriptionElement = document.querySelector("#description");
 
-      const locationInput = document.querySelector("#locationInput");
-      const searchButton = document.querySelector("#searchButton");
-      const locationElement = document.querySelector("#location");
-      const temperatureElement = document.querySelector("#temperature");
-      const descriptionElement = document.querySelector("#description");
+  searchButton.addEventListener("click", async () => {
+    const location = locationInput.value.trim();
+    if (!location) {
+      locationElement.textContent = "Please enter a city name!";
+      temperatureElement.textContent = "";
+      descriptionElement.textContent = "";
+      return;
+    }
 
-      searchButton.addEventListener("click", () => {
-        const location = locationInput.value;
-        if (location) {
-          fetchWeather(location);
-        }
-      });
-    </script>
+    locationElement.textContent = "Loading...";
+    temperatureElement.textContent = "";
+    descriptionElement.textContent = "";
+
+    try {
+      // 1️⃣ Város keresése Open-Meteo geocoding API-val
+      const geoRes = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(location)}&count=1`
+      );
+      const geoData = await geoRes.json();
+
+      if (!geoData.results || geoData.results.length === 0) {
+        locationElement.textContent = "City not found 😢";
+        return;
+      }
+
+      const { latitude, longitude, name, country } = geoData.results[0];
+
+      // 2️⃣ Időjárás lekérdezése Open-Meteo API-ból
+      const weatherRes = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=auto`
+      );
+      const weatherData = await weatherRes.json();
+
+      const { temperature, weathercode, windspeed } = weatherData.current_weather;
+
+      // 3️⃣ Weather code -> leírás (egyszerű táblázat)
+      const weatherDescriptions = {
+        0: "Clear sky ☀️",
+        1: "Mainly clear 🌤️",
+        2: "Partly cloudy ⛅",
+        3: "Overcast ☁️",
+        45: "Fog 🌫️",
+        48: "Depositing rime fog 🌫️",
+        51: "Light drizzle 🌦️",
+        61: "Rain 🌧️",
+        71: "Snow ❄️",
+        95: "Thunderstorm ⛈️"
+      };
+
+      const description = weatherDescriptions[weathercode] || "Unknown weather";
+
+      // 4️⃣ Adatok megjelenítése
+      locationElement.textContent = `${name}, ${country}`;
+      temperatureElement.textContent = `${Math.round(temperature)} °C`;
+      descriptionElement.textContent = description;
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      locationElement.textContent = "Something went wrong 😅";
+    }
+  });
+</script>
+
   </body>
 </html>
