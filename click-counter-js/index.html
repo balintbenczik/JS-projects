@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Click counter</title>
+  </head>
+  <body class="bg-gray-200 flex justify-center items-center h-screen">
+    <div
+      class="flex flex-col h-50 w-50 items-center rounded justify-center bg-gray-300"
+    >
+      <div>
+        <h1 id="text">1</h1>
+      </div>
+      <div>
+        <button id="btn" class="border-1 p-2 m-2 cursor-pointer">Click</button>
+      </div>
+    </div>
+    <script>
+      // Declare variables
+
+      text = document.querySelector("#text");
+      button = document.querySelector("#btn");
+
+      // Starting value
+
+      let count = 0;
+
+      // Function
+
+      function btnCounter() {
+        count++;
+        text.textContent = count;
+      }
+
+      button.addEventListener("click", btnCounter);
+    </script>
+  </body>
+</html>
