@@ -29,16 +29,30 @@
         "Happiness is not a goal, but a way of life.",
       ];
 
+      const color = [
+        "bg-red-200",
+        "bg-pink-200",
+        "bg-green-200",
+        "bg-blue-200",
+        "bg-gray-400",
+        "bg-teal-200",
+        "bg-red-400",
+      ];
+
       // Declare variables
 
       const btn = document.querySelector("#btn");
       const quoteText = document.querySelector("#quote");
 
-      // Random Index generation
+      // Random Index generation + random bg color for quotes
 
       btn.addEventListener("click", () => {
         const randomIndex = Math.floor(Math.random() * quotes.length);
         quoteText.textContent = quotes[randomIndex];
+
+        const randomColor = Math.floor(Math.random() * color.length);
+        color.forEach((c) => quoteText.classList.remove(c));
+        quoteText.classList.add(color[randomIndex]);
       });
     </script>
   </body>
