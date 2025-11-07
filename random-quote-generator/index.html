@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quote generator</title>
-</head>
-<body class="bg-gray-100">
-    <div>
-        <h2>Random Quote generator</h2>
-        <p>Press the button for a random quote</p>
-        <button>New quote</button>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen w-100%">
+    <div
+      class="flex flex-col bg-gray-200 h-50 w-100 items-center justify-around p-5 rounded"
+    >
+      <h1 class="font-bold">Random Quote generator</h1>
+      <p id="quote">Press the button for a random quote</p>
+      <button id="btn" class="border-1 px-5 py-2 hover:bg-gray-100 rounded">
+        New quote
+      </button>
     </div>
-</body>
+    <script>
+      // Create an array with quotes
+
+      const quotes = [
+        "Life isn’t about waiting for the storm to pass, but about learning to dance in the rain.",
+        "Don’t be afraid to take a big step if one is needed. You can’t cross a chasm in two small jumps.",
+        "The secret of success is to never give up.",
+        "The greatest glory lies not in never falling, but in rising every time we fall.",
+        "Do what you can, with what you have, where you are.",
+        "Do what you can, with what you have, where you are.",
+        "Happiness is not a goal, but a way of life.",
+      ];
+
+      // Declare variables
+
+      const btn = document.querySelector("#btn");
+      const quoteText = document.querySelector("#quote");
+
+      // Random Index generation
+
+      btn.addEventListener("click", () => {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        quoteText.textContent = "quotes[randomIndex]";
+      });
+    </script>
+  </body>
 </html>
