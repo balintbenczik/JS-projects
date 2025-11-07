@@ -8,30 +8,45 @@
   </head>
   <body class="bg-gray-200 flex justify-center items-center h-screen">
     <div
-      class="flex flex-col h-50 w-50 items-center rounded justify-center bg-gray-300"
+      class="flex flex-col h-50 w-100 items-center rounded justify-center bg-gray-300 p-4"
     >
       <div>
-        <h1 id="text">1</h1>
+        <h1 id="text">0</h1>
       </div>
       <div>
-        <button id="btn" class="border-1 p-2 m-2 cursor-pointer">Click</button>
-        <button id="reset" class="border-1 p-2 m-2 cursor-pointer">
+        <button
+          id="btn"
+          class="border p-2 m-2 cursor-pointer bg-blue-500 text-white rounded"
+        >
+          Click
+        </button>
+        <button
+          id="reset"
+          class="border p-2 m-2 cursor-pointer bg-red-500 text-white rounded"
+        >
           Reset
+        </button>
+        <button
+          id="repeat"
+          class="border p-2 m-2 cursor-pointer bg-green-500 text-white rounded"
+        >
+          Repeat
         </button>
       </div>
     </div>
+
     <script>
       // Declare variables
-
-      text = document.querySelector("#text");
-      button = document.querySelector("#btn");
-      reset = document.querySelector("#reset");
+      const text = document.querySelector("#text");
+      const button = document.querySelector("#btn");
+      const reset = document.querySelector("#reset");
+      const repeat = document.querySelector("#repeat");
 
       // Starting value
 
       let count = 0;
 
-      // Function
+      // Button logic with click event
 
       const btnCounter = () => {
         count++;
@@ -39,6 +54,30 @@
       };
 
       button.addEventListener("click", btnCounter);
+
+      // Reset button logic with click event
+
+      const resetButton = () => {
+        count = 0;
+        text.textContent = count;
+
+        button.removeEventListener("click", btnCounter);
+
+        button.classList.add("opacity-50");
+        button.disabled = true;
+      };
+
+      reset.addEventListener("click", resetButton);
+
+      // Repeat button logic with click event
+
+      const repeatButton = () => {
+        button.addEventListener("click", btnCounter);
+        button.classList.remove("opacity-50");
+        button.disabled = false;
+      };
+
+      repeat.addEventListener("click", repeatButton);
     </script>
   </body>
 </html>
