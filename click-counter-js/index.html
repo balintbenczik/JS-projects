@@ -15,6 +15,9 @@
       </div>
       <div>
         <button id="btn" class="border-1 p-2 m-2 cursor-pointer">Click</button>
+        <button id="reset" class="border-1 p-2 m-2 cursor-pointer">
+          Reset
+        </button>
       </div>
     </div>
     <script>
@@ -22,6 +25,7 @@
 
       text = document.querySelector("#text");
       button = document.querySelector("#btn");
+      reset = document.querySelector("#reset");
 
       // Starting value
 
@@ -29,10 +33,10 @@
 
       // Function
 
-      function btnCounter() {
+      const btnCounter = () => {
         count++;
         text.textContent = count;
-      }
+      };
 
       button.addEventListener("click", btnCounter);
     </script>
