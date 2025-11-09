@@ -5,9 +5,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scroll to top</title>
+    <style> html {scroll-behavior: smooth;}</style>
   </head>
   <body class="bg-gray-600 h-screen w-full">
-    <nav class="flex items-center justify-between p-5 bg-gray-300">
+    <nav id="top" class="flex items-center justify-between p-5 bg-gray-300">
       <div>
         <img src="logo.png" alt="Logo" />
       </div>
@@ -23,8 +24,9 @@
         <div class="h-[1500px]"></div>
         <div class="hidden" id="btnScroll">
           <div
-            class="flex w-15 fixed bottom-5 right-5 rounded border-1 justify-center items-center bg-gray-300">
-            <p>Up</p>
+            class="flex fixed bottom-5 right-5 cursor-pointer hover:bg-gray-100 h-10 w-10 rounded border-1 justify-center items-center bg-gray-300"
+          >
+            <a href="#top">Up</a>
           </div>
         </div>
       </section>
@@ -33,13 +35,13 @@
       btn = document.getElementById("btnScroll");
 
       window.addEventListener("scroll", () => {
-        y = window.scrollY
-        if (y>300) {
-            btn.classList.remove("hidden")
+        y = window.scrollY;
+        if (y > 300) {
+          btn.classList.remove("hidden");
         } else {
-            btn.classList.add("hidden")
+          btn.classList.add("hidden");
         }
-      } )
+      });
     </script>
   </body>
 </html>
