@@ -2,26 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- stabil verzió -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unique dropdown</title>
   </head>
   <body class="bg-gray-600 h-screen w-full">
     <nav class="bg-gray-300 flex justify-between items-center p-5">
       <div class="flex">
-        <img src="logo.png" alt="Logo" />
+        <img src="logo.png" alt="Logo" class="h-8" />
       </div>
       <ul class="flex gap-5 relative">
-        <li><a class="dropdownBtn" href="#">Home</a></li>
+        <li class="relative group">
+          <a id="menu1" class="dropdownBtn" href="#">Home</a>
+          <div
+            class="hidden group-hover:flex flex-col bg-gray-300 absolute left-0 top-full gap-1 rounded justify-start shadow-lg"
+            id="dropDownMenu">
+            <a class="block text-left pr-2 py-2 hover:bg-gray-400 rounded" href="#">Option</a>
+            <a class="block text-left pr-2 py-2 hover:bg-gray-400 rounded" href="#">Option</a>
+            <a class="block text-left pr-2 py-2 hover:bg-gray-400 rounded" href="#">Option</a>
+          </div>
+        </li>
         <li><a href="#">About us</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">References</a></li>
       </ul>
     </nav>
-    <div class="flex flex-col bg-gray-300 absolute" id="dropdownMenu">
-      <a href="#">Option 1</a>
-      <a href="#">Option 2</a>
-      <a href="#">Option 3</a>
-    </div>
   </body>
 </html>
