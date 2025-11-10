@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Image Slider</title>
+  </head>
+  <body
+    class="bg-gray-900 flex flex-col items-center justify-center h-screen text-white"
+  >
+    <div
+      class="relative w-[500px] h-[300px] overflow-hidden rounded-lg shadow-lg"
+    >
+      <img
+        id="sliderImage"
+        src="https://picsum.photos/id/1018/500/300"
+        alt="slider"
+        class="w-full h-full object-cover transition-all duration-500"
+      />
+
+      <!-- Navigation buttons -->
+      <button
+        id="prevBtn"
+        class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-70"
+      >
+        ⬅
+      </button>
+      <button
+        id="nextBtn"
+        class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-70"
+      >
+        ➡
+      </button>
+    </div>
+
+    <script>
+      const images = [
+        "https://picsum.photos/id/1018/500/300",
+        "https://picsum.photos/id/1015/500/300",
+        "https://picsum.photos/id/1021/500/300",
+        "https://picsum.photos/id/1022/500/300",
+        "https://picsum.photos/id/1023/500/300",
+      ];
+
+      let index = 0;
+      const img = document.getElementById("sliderImage");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      function showImage(i) {
+        index = (i + images.length) % images.length; // körbeforgás
+        img.src = images[index];
+      }
+
+      prevBtn.addEventListener("click", () => showImage(index - 1));
+      nextBtn.addEventListener("click", () => showImage(index + 1));
+
+      // Automatikus váltás 3 másodpercenként
+      setInterval(() => showImage(index + 1), 3000);
+    </script>
+  </body>
+</html>
